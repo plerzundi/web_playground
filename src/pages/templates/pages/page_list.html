@@ -2,26 +2,27 @@
 {% load static %}
 {% block title %}Páginas{% endblock %}
 {% block content %}
-<main role="main">
-  <div class="container mb-4">
-    {% for page in pages %}
-      <div class="row mt-3">
-        <div class="col-md-9 mx-auto">
-          <h2 class="mb-4">{{page.title}}</h2>
-          <div>
-            <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
-            <p><a href="{% url 'page' page.id page.title|slugify %}">Leer más</a>
-              <!--
+    {% include 'pages/includes/pages_menu.html' %}
+    <main role="main">
+        <div class="container mb-4">
+            {% for page in page_list|dictsort:"id" reversed %}
+                <div class="row mt-3">
+                    <div class="col-md-9 mx-auto">
+                        <h2 class="mb-4">{{ page.title }}</h2>
+                        <div>
+                            <p>{{ page.content|striptags|safe|truncatechars:"200" }}</p>
+                            <p><a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
+
               {% if request.user.is_staff %}
-                | <a href="#">Editar</a>
-                | <a href="#">Borrar</a>
+                | <a href="{% url 'pages:update' page.id %}">Editar</a>
+                | <a href="{% url 'pages:delete' page.id %}">Borrar</a>
               {% endif %}
-              -->
-            </p>
-          </div>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-  </div>
-</main>
+    </main>
 {% endblock %}
