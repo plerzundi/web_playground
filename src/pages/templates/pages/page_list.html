@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Páginas{% endblock %}
 {% block content %}
-    {% include 'pages/includes/pages_menu.html' %}
+    {% include 'pages/includes/page_menu.html' %}
     <main role="main">
         <div class="container mb-4">
             {% for page in page_list|dictsort:"id" reversed %}
