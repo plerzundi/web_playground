@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from pages.urls import pages_patterns
 from profiles.urls import profiles_patterns
+from messenger.urls import messenger_patterns
 from django.conf import settings
 
 urlpatterns = [
@@ -13,8 +14,8 @@ urlpatterns = [
     path('accounts/', include('registration.urls')),
     #path de profiles
     path('profiles/',include(profiles_patterns)),
-
-
+    #path de messenger
+    path('messenger/', include(messenger_patterns)),
 
 ]
 
